@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Proyectos</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleSearch = !toggleSearch; filterName = '';">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="toggleSearch" color="default">
+    <ion-searchbar placeholder="Buscar proyecto por nombre" [(ngModel)]="filterName"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" size="small" (click)="createNewProject()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list class="ion-margin-top">
+    <app-project-item *ngFor="let project of projects | filterProject : { name: filterName }"
+      (removeProject)="deleteProject($event);" [project]="project"></app-project-item>
+  </ion-list>
+
+  <ion-card *ngIf="projects.length == 0" class="ion-margin-top">
+    <ion-card-content class="ion-text-center">
+      Aún no tienes proyectos creados...
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/tasks/' + projectId"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formTask">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre de la tarea</ion-label>
+        <ion-input formControlName="name" name="name" id="name"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="formTask.get('name').touched && !formTask.get('name').valid">
+        <small>* Este campo es requerido</small>
+      </ion-text>
+    </ion-list>
+    <ion-button *ngIf="pageTitle === 'Crear tarea'" [disabled]="!formTask.valid" type="button"
+      (click)="insertProject()" color="primary" expand="block">
+      Guardar tarea</ion-button>
+    <ion-button *ngIf="pageTitle === 'Actualizar tarea'" [disabled]="!formTask.valid" type="button"
+      (click)="updateProject()" color="primary" expand="block">
+      Actualizar tarea</ion-button>
+  </form>
+</ion-content>

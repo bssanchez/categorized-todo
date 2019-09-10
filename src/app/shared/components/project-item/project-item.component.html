@@ -1,0 +1,16 @@
+<ion-item-sliding [class.inactive]="!project.active">
+  <ion-item>
+    <ion-avatar slot="start">
+      <img [src]="project.avatar">
+    </ion-avatar>
+    <ion-label (click)="showTasksProject()">
+      <h2>{{ project.name }}</h2>
+      <p>{{ project.description }}</p>
+    </ion-label>
+    <ion-toggle [checked]="project.active" (ionChange)="toggleActiveMode(project, !project.active)" slot="end"></ion-toggle>
+  </ion-item>
+  <ion-item-options side="end">
+    <ion-item-option color="danger" (click)="delete()"><ion-icon name="trash"> </ion-icon></ion-item-option>
+    <ion-item-option color="primary" (click)="editProject()"><ion-icon name="create"> </ion-icon></ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

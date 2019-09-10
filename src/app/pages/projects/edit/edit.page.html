@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/projects"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="formProject">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre del proyecto</ion-label>
+        <ion-input formControlName="name" name="name" id="name"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="formProject.get('name').touched && !formProject.get('name').valid">
+        <small>* Este campo es requerido</small>
+      </ion-text>
+      <ion-item>
+        <ion-label position="floating">Descripción del proyecto</ion-label>
+        <ion-textarea formControlName="description" name="description" id="description"></ion-textarea>
+      </ion-item>
+      <ion-text color="danger" *ngIf="formProject.get('description').touched && !formProject.get('description').valid">
+        <small>* Este campo es requerido</small>
+      </ion-text>
+      <ion-item>
+        <input #inputFileAvatar (change)="changeUploadItem($event)" type="file" class="ion-hide">
+        <ion-button type="button" (click)="inputFileAvatar.click()" color="secondary" expand="block">Seleccionar avatar
+        </ion-button>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!formProject.get('avatar').valid">
+        <small>* Este campo es requerido</small>
+      </ion-text>
+    </ion-list>
+    <ion-button *ngIf="pageTitle === 'Crear proyecto'" [disabled]="!formProject.valid" type="button" (click)="insertProject()" color="primary" expand="block">
+      Guardar proyecto</ion-button>
+    <ion-button *ngIf="pageTitle === 'Actualizar proyecto'" [disabled]="!formProject.valid" type="button" (click)="updateProject()" color="primary" expand="block">
+      Actualizar proyecto</ion-button>
+  </form>
+</ion-content>
