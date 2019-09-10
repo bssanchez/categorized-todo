@@ -15,12 +15,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary" size="small" (click)="createNewProject()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <ion-list class="ion-margin-top">
     <app-project-item *ngFor="let project of projects | filterProject : { name: filterName }"
       (removeProject)="deleteProject($event);" [project]="project"></app-project-item>
@@ -31,4 +25,11 @@
       Aún no tienes proyectos creados...
     </ion-card-content>
   </ion-card>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" size="small" (click)="createNewProject()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
