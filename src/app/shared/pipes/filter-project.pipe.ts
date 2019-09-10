@@ -11,10 +11,8 @@ export class FilterProjectPipe implements PipeTransform {
     if (typeof items.filter !== 'undefined') {
       return items.filter(item => {
         for (const field in conditions) {
-          const fieldText = item[field].toLowerCase(),
-            conditionText = conditions[field].toLowerCase();
-
-          console.log(fieldText, 'cond', conditionText);
+          const fieldText = item[field].toLowerCase();
+          const conditionText = conditions[field].toLowerCase();
 
           if (conditionText !== '' && fieldText.indexOf(conditionText) === -1) {
             return false;
